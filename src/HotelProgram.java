@@ -4,8 +4,8 @@ import java.util.*;
 public class HotelProgram {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String roomName;
-        int roomNum = 0;
+
+        char option;
 
         String[] hotel = new String[7];//Array of rooms
 
@@ -19,23 +19,11 @@ public class HotelProgram {
 
         while (true)
         {
-            System.out.println("V - ‘View All Rooms ");
+            System.out.println(
+                    "V - ‘View All Rooms" +
+                    "A - Add Customer to Room");
 
-            System.out.println("Enter room number (0-5) or 6 to stop:");
-            roomNum = input.nextInt();//get the input room number
-
-            //if the room number is not 6
-            if(roomNum != 6)
-            {
-                System.out.println("Enter name for room " + roomNum + " :");
-                roomName = input.next();//store name for room
-                hotel[roomNum] = roomName;//assign the name to array index holding the room number
-            }
-            else
-            {
-                System.out.println("system will terminate!");
-                break;
-            }
+            System.out.println("Select your option: ");
         }
     }
 
@@ -64,5 +52,7 @@ public class HotelProgram {
     }
 
     //Method to add customers
-    
+    private static void add(String hotelRef[]) {
+        
+    }
 }
