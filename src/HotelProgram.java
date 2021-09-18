@@ -25,8 +25,9 @@ public class HotelProgram {
             }
         }
     }
+    
     private static void initialise( String hotelRef[] ) {
         for (int x = 0; x < 6; x++ ) hotelRef[x] = "e";
-        System.out.println( "initilise ");
+        System.out.println( "initialise ");
     }
 }
