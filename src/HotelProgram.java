@@ -26,6 +26,7 @@ public class HotelProgram {
         }
     }
     
+    //Method to initialize empty rooms
     private static void initialise( String hotelRef[] ) {
         for (int x = 0; x < 6; x++ ) hotelRef[x] = "e";
         System.out.println( "initialise ");
