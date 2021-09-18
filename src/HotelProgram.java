@@ -56,10 +56,13 @@ public class HotelProgram {
                     System.out.println("room " + x + " is empty");
                 }
             }
-            
+
             for (int x = 0; x < 6; x++) {
                 System.out.println("room " + x + " occupied by " + hotelRef[x]);
             }
         }
     }
+
+    //Method to add customers
+    
 }
