@@ -15,6 +15,8 @@ public class HotelProgram {
 
         initialise(hotel); //calling initialize method
 
+
+
         while (true)
         {
             System.out.println("V - ‘View All Rooms ");
@@ -48,7 +50,6 @@ public class HotelProgram {
     //Method to view all rooms
     private static void view(String hotelRef[]) {
         int roomNum = 0;
-
         while (roomNum < 6) {
             for (int x = 0; x < 6; x++) {
                 if (hotelRef[x].equals("e")) {
