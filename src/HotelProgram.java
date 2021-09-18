@@ -31,4 +31,6 @@ public class HotelProgram {
         for (int x = 0; x < 6; x++ ) hotelRef[x] = "e";
         System.out.println( "initialise ");
     }
+
+    //Method ti view all rooms
 }
