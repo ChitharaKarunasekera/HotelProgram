@@ -56,24 +56,5 @@ public class HotelProgram {
         Scanner input = new Scanner(System.in); //
         String roomName;
         int roomNum;
-
-        while (true)
-        {
-            System.out.println("Enter room number (0-5) or 6 to stop:");
-            roomNum = input.nextInt();//get the input room number
-
-            //if the room number is not 6
-            if(roomNum != 6)
-            {
-                System.out.println("Enter name for room " + roomNum + " :");
-                roomName = input.next();//store name for room
-                hotelRef[roomNum] = roomName;//assign the name to array index holding the room number
-            }
-            else
-            {
-                System.out.println("system will terminate!");
-                break;
-            }
-        }
     }
 }
