@@ -46,5 +46,19 @@ public class HotelProgram {
     }
 
     //Method to view all rooms
-    
+    private static void view(String hotelRef[]) {
+        int roomNum = 0;
+
+        while (roomNum < 6) {
+            for (int x = 0; x < 6; x++) {
+                if (hotelRef[x].equals("e")) {
+                    System.out.println("room " + x + " is empty");
+                }
+            }
+
+            for (int x = 0; x < 6; x++) {
+                System.out.println("room " + x + " occupied by " + hotelRef[x]);
+            }
+        }
+    }
 }
