@@ -24,6 +24,9 @@ public class HotelProgram {
                             "S - Stop\n" +
                             "----------------------------"
             );
+            
+            System.out.print("Select your option: ");
+            option = (char) (input.next().charAt(0) & 0x5f);
         }
     }
 
