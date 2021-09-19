@@ -16,14 +16,8 @@ public class HotelProgram {
         initialise(hotel); //calling initialize method
 
 
-
-        while (true)
-        {
-            System.out.println(
-                    "V - ‘View All Rooms" +
-                    "A - Add Customer to Room");
-
-            System.out.println("Select your option: ");
+        while (true) {
+            
         }
     }
 
@@ -32,20 +26,14 @@ public class HotelProgram {
         for (int x = 0; x < 6; x++) {
             hotelRef[x] = "e";
         }
-        System.out.println("initialised ");
     }
 
     //Method to view all rooms
     private static void view(String hotelRef[]) {
-        int roomNum = 0;
-        while (roomNum < 6) {
-            for (int x = 0; x < 6; x++) {
-                if (hotelRef[x].equals("e")) {
-                    System.out.println("room " + x + " is empty");
-                }
-            }
-
-            for (int x = 0; x < 6; x++) {
+        for (int x = 0; x < 6; x++) {
+            if (hotelRef[x].equals("e")) {
+                System.out.println("room " + x + " is empty");
+            } else {
                 System.out.println("room " + x + " occupied by " + hotelRef[x]);
             }
         }
@@ -56,23 +44,25 @@ public class HotelProgram {
         Scanner input = new Scanner(System.in); //
         String roomName;
         int roomNum;
-        
-         while (true)
-        {
+
+        while (true) {
             System.out.println("Enter room number (0-5) or 6 to stop:");
             roomNum = input.nextInt();//get the input room number
 
-            //if the room number is not 6
-            if(roomNum != 6)
-            {
+            //if the room number is between the existing room numbers
+            if (roomNum < 6 && roomNum >= 0) {
                 System.out.println("Enter name for room " + roomNum + " :");
                 roomName = input.next();//store name for room
                 hotelRef[roomNum] = roomName;//assign the name to array index holding the room number
             }
-            else
-            {
-                System.out.println("system will terminate!");
+            //if number is 6 stop adding customers
+            else if (roomNum == 6) {
+                System.out.println("Stopped adding customers to rooms");
                 break;
+            }
+            //Entered an invalid room number
+            else {
+                System.out.println("Invalid room number. Please enter a number between 0 - 5");
             }
         }
     }
