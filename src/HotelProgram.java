@@ -17,7 +17,7 @@ public class HotelProgram {
 
 
         while (true) {
-            
+
         }
     }
 
