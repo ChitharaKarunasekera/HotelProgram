@@ -17,7 +17,13 @@ public class HotelProgram {
 
 
         while (true) {
-            
+            System.out.println(
+                    "\n----------------------------\n" +
+                            "V - View All Rooms\n" +
+                            "A - Add Customer to Room\n" +
+                            "S - Stop\n" +
+                            "----------------------------"
+            );
         }
     }
 
