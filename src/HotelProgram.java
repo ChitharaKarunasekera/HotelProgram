@@ -17,7 +17,32 @@ public class HotelProgram {
 
 
         while (true) {
-
+            System.out.println(
+                    "\n----------------------------\n" +
+                            "V - View All Rooms\n" +
+                            "A - Add Customer to Room\n" +
+                            "S - Stop\n" +
+                            "----------------------------"
+            );
+            
+            System.out.print("Select your option: ");
+            option = (char) (input.next().charAt(0) & 0x5f);
+            
+            if (option == 'V')
+            {
+                System.out.println("View all Rooms.");
+                view(hotel);//calling view method
+            }
+            else if(option == 'A')
+            {
+                System.out.println("Add customer to room.");
+                add(hotel);//calling add method
+            }
+            else if (option == 'S')
+            {
+                System.out.println("System will terminate!");
+                break;
+            }
         }
     }
 
