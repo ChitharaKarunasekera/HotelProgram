@@ -1,6 +1,8 @@
-
-import java.awt.*;
 import java.util.*;
+import java.io.File;//File Classes to create file
+import java.io.IOException;// class ro handle error in file handling
+import java.io.FileWriter;//File class to write to file
+import java.io.FileNotFoundException;//Exception if file was not found
 
 public class HotelProgram {
     public static void main(String[] args) {
@@ -31,7 +33,7 @@ public class HotelProgram {
                             "S - Store program data into file\n" +
                             "L - Load program data from file\n" +
                             "O - Ordered alphabetically by name.\n" +
-                            "S - Stop\n" +
+                            "Q - Quit\n" +
                             "----------------------------"
             );
 
@@ -64,6 +66,12 @@ public class HotelProgram {
                 roomName = input.next();//get the name to find room number
                 find(hotel, roomName);
             } else if (option == 'S') {
+                System.out.println("Storing data to file.");
+                store(hotel);
+            } else if (option == 'L') {
+                System.out.println("Loading data from file.");
+                load();
+            } else if (option == 'Q') {
                 System.out.println("System will terminate!");
                 break;
             }
@@ -156,14 +164,55 @@ public class HotelProgram {
 
     //Function to find customer from name
     private static void find(String hotelRef[], String roomName) {
-        for (int i = 0; i < hotelRef.length-1; i++) {
-            if (hotelRef[i].equalsIgnoreCase(roomName)){
+        for (int i = 0; i < hotelRef.length - 1; i++) {
+            if (hotelRef[i].equalsIgnoreCase(roomName)) {
                 System.out.println("Customer " + hotelRef[i] + " is in room " + i);
                 break;
             }
-            if (i == hotelRef.length-2){
+            if (i == hotelRef.length - 2) {
                 System.out.println("Sorry! Customer " + roomName + " does not exist.");
             }
+        }
+    }
+
+    //Store program data to file
+    private static void store(String hotelRef[]) {
+        //Writing data to file
+        try {
+            FileWriter writerObject = new FileWriter("E:\\Java\\HotelProgram\\hotelData.txt");//Writer object
+            writerObject.write("From store method!\n");
+            //writing data to file
+            for (int i = 0; i < hotelRef.length - 1; i++) {
+                if (isEmpty(hotelRef, i) != -1) {
+                    //if the method's return value is not -1 the room is empty
+                    writerObject.write("room " + i + " is empty\n");
+                } else {
+                    //when return value is -1 the room is occupied. then display by whom it is
+                    writerObject.write("room " + i + " occupied by " + hotelRef[i] + "\n");
+                }
+            }
+            writerObject.close();//close file
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred! Could not write to file.");
+            e.printStackTrace();//throw exception
+        }
+    }
+
+    //Loading data from file
+    private static void load(){
+        try {
+            File fileObject = new File("E:\\Java\\HotelProgram\\hotelData.txt");
+            Scanner fileReader = new Scanner(fileObject);
+
+            while (fileReader.hasNextLine()) {
+                String data = fileReader.nextLine();
+                System.out.println(data);
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

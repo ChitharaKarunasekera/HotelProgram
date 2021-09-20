@@ -1,0 +1,7 @@
+From store method!
+room 0 occupied by Chithara
+room 1 is empty
+room 2 is empty
+room 3 occupied by Tom
+room 4 is empty
+room 5 is empty
