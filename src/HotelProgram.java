@@ -71,6 +71,9 @@ public class HotelProgram {
             } else if (option == 'L') {
                 System.out.println("Loading data from file.");
                 load();
+            } else if (option == 'O') {
+                System.out.println("Names in Alphabetical order.");
+                sortNames(hotel);
             } else if (option == 'Q') {
                 System.out.println("System will terminate!");
                 break;
@@ -122,6 +125,7 @@ public class HotelProgram {
             if (roomNum < 6 && roomNum >= 0) {
                 System.out.print("Enter name for room " + roomNum + " : ");
                 roomName = input.next();//store name for room
+                roomName = roomName.substring(0, 1).toUpperCase(Locale.ROOT) + roomName.substring(1);
                 hotelRef[roomNum] = roomName;//assign the name to array index holding the room number
             }
             //if number is 6 stop adding customers
@@ -200,7 +204,7 @@ public class HotelProgram {
     }
 
     //Loading data from file
-    private static void load(){
+    private static void load() {
         try {
             File fileObject = new File("E:\\Java\\HotelProgram\\hotelData.txt");
             Scanner fileReader = new Scanner(fileObject);
@@ -213,6 +217,32 @@ public class HotelProgram {
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        }
+    }
+
+    //View guests ordered alphabetically by name.
+    private static void sortNames(String hotelRef[]) {
+        String temp;
+        System.out.println("\nGuests Ordered alphabetically");
+
+        //Arrange the names in order using bubble sort algorithm
+        for (int j = 0; j < hotelRef.length-1; j++) {
+            for (int i = j + 1; i < hotelRef.length-1; i++) {
+                if (!(hotelRef[i].equals("e"))) {
+                    //Check if the first element of the array is less than the next element and swap them
+                    if (hotelRef[i].compareTo(hotelRef[j]) < 0) {
+                        temp = hotelRef[j];
+                        hotelRef[j] = hotelRef[i];
+                        hotelRef[i] = temp;
+                    }
+                }
+            }
+        }
+
+        for (int i = 0; i < hotelRef.length-1; i++) {
+            if (!(hotelRef[i].equals("e"))) {
+                System.out.println(hotelRef[i]);//Display the sorted names if the name is not "e"
+            }
         }
     }
 }
