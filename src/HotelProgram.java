@@ -216,7 +216,7 @@ public class HotelProgram {
             fileReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
-            e.printStackTrace();
+            e.printStackTrace();//
         }
     }
 
