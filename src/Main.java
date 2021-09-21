@@ -78,25 +78,6 @@ public class Main {
         }
     }
 
-//    //Method to initialize empty rooms
-//    private static void initialise(String hotelRef[]) {
-//        for (int x = 0; x < 6; x++) {
-//            hotelRef[x] = "e";
-//        }
-//    }
-
-//    //Method to view all rooms
-//    private static void view(String hotelRef[]) {
-//        for (int x = 0; x < 6; x++) {
-//            if (isEmpty(hotelRef, x) != -1) {
-//                //if the method's return value is not -1 the room is empty
-//                System.out.println("room " + x + " is empty");
-//            } else {
-//                //when return value is -1 the room is occupied. then display by whom it is
-//                System.out.println("room " + x + " occupied by " + hotelRef[x]);
-//            }
-//        }
-//    }
 
 //    //Method to add customers
 //    private static void add(String hotelRef[]) {
