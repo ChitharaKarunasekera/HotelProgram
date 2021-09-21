@@ -1,8 +1,4 @@
 import java.util.*;
-import java.io.File;//File Classes to create file
-import java.io.IOException;// class ro handle error in file handling
-import java.io.FileWriter;//File class to write to file
-import java.io.FileNotFoundException;//Exception if file was not found
 
 public class Main {
     public static void main(String[] args) {
