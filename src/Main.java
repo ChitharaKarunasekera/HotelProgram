@@ -56,7 +56,7 @@ public class Main {
                 System.out.println("Empty rooms.");
                 //calls the isEmpty method and checks if each room is empty or not
                 for (int i = 0; i < hotel.length - 1; i++) {
-                    if (isEmpty(hotel, i) != -1) {
+                    if (myHotel.isEmpty(i) != -1) {
                         System.out.println("Room " + i);//Display room number is the function returns the number
                     }
                 }
@@ -64,21 +64,21 @@ public class Main {
                 System.out.println("Delete a customer.");
                 System.out.print("Enter Room number: ");
                 roomNum = input.nextInt();//store the room number the user want to delete
-                delete(hotel, roomNum);
+                myHotel.delete(roomNum);
             } else if (option == 'F') {
                 System.out.println("Find a customer.");
                 System.out.print("Enter the name for room: ");
                 roomName = input.next();//get the name to find room number
-                find(hotel, roomName);
+                myHotel.find(roomName);
             } else if (option == 'S') {
                 System.out.println("Storing data to file.");
-                store(hotel);
+                myHotel.store();
             } else if (option == 'L') {
                 System.out.println("Loading data from file.");
-                load();
+                myHotel.load();
             } else if (option == 'O') {
                 System.out.println("Names in Alphabetical order.");
-                sortNames(hotel);
+                myHotel.sortNames();
             } else if (option == 'Q') {
                 System.out.println("System will terminate!");
                 break;
@@ -87,14 +87,14 @@ public class Main {
     }
 
     //find empty rooms
-    private static int isEmpty(String hotelRef[], int roomNum) {
-        if (hotelRef[roomNum].equals("e")) {
-            //System.out.println("room " + roomNum + " is empty");
-            return roomNum;
-        } else
-            //return -1 if the room is occupied
-            return -1;
-    }
+//    private static int isEmpty(String hotelRef[], int roomNum) {
+//        if (hotelRef[roomNum].equals("e")) {
+//            //System.out.println("room " + roomNum + " is empty");
+//            return roomNum;
+//        } else
+//            //return -1 if the room is occupied
+//            return -1;
+//    }
 
 //    //Method to initialize empty rooms
 //    private static void initialise(String hotelRef[]) {
@@ -145,109 +145,110 @@ public class Main {
 //        }
 //    }
 
-    private static void delete(String hotelRef[], int roomNum) {
-        Scanner input = new Scanner(System.in);
-        char ans;
 
-        while (true) {
-            //check if the room is not empty
-            if (isEmpty(hotelRef, roomNum) == -1) {
-                //confirm the request
-                System.out.print("Are you sure you want to remove Customer " + hotelRef[roomNum] + " from room" + roomNum + "(y/n)?");
-                ans = (char) (input.next().charAt(0) & 0x5f);//Convert inout to upper case
+//    private static void delete(String hotelRef[], int roomNum) {
+//        Scanner input = new Scanner(System.in);
+//        char ans;
+//
+//        while (true) {
+//            //check if the room is not empty
+//            if (isEmpty(hotelRef, roomNum) == -1) {
+//                //confirm the request
+//                System.out.print("Are you sure you want to remove Customer " + hotelRef[roomNum] + " from room" + roomNum + "(y/n)?");
+//                ans = (char) (input.next().charAt(0) & 0x5f);//Convert inout to upper case
+//
+//                //remove the customer if the request was confirmed or else cancel the requests
+//                if (ans == 'Y') {
+//                    System.out.println(hotelRef[roomNum] + " was removed from room " + roomNum);
+//                    hotelRef[roomNum] = "e";
+//                    break;
+//                } else {
+//                    System.out.println("Request has been canceled! Customer " + hotelRef[roomNum] + " was not removed.");
+//                    break;
+//                }
+//            } else {
+//                System.out.println("\nSorry! This room is already empty.\n");
+//            }
+//        }
+//    }
 
-                //remove the customer if the request was confirmed or else cancel the requests
-                if (ans == 'Y') {
-                    System.out.println(hotelRef[roomNum] + " was removed from room " + roomNum);
-                    hotelRef[roomNum] = "e";
-                    break;
-                } else {
-                    System.out.println("Request has been canceled! Customer " + hotelRef[roomNum] + " was not removed.");
-                    break;
-                }
-            } else {
-                System.out.println("\nSorry! This room is already empty.\n");
-            }
-        }
-    }
+//    //Function to find customer from name
+//    private static void find(String hotelRef[], String roomName) {
+//        for (int i = 0; i < hotelRef.length - 1; i++) {
+//            if (hotelRef[i].equalsIgnoreCase(roomName)) {
+//                System.out.println("Customer " + hotelRef[i] + " is in room " + i);
+//                break;
+//            }
+//            if (i == hotelRef.length - 2) {
+//                System.out.println("Sorry! Customer " + roomName + " does not exist.");
+//            }
+//        }
+//    }
 
-    //Function to find customer from name
-    private static void find(String hotelRef[], String roomName) {
-        for (int i = 0; i < hotelRef.length - 1; i++) {
-            if (hotelRef[i].equalsIgnoreCase(roomName)) {
-                System.out.println("Customer " + hotelRef[i] + " is in room " + i);
-                break;
-            }
-            if (i == hotelRef.length - 2) {
-                System.out.println("Sorry! Customer " + roomName + " does not exist.");
-            }
-        }
-    }
+//    //Store program data to file
+//    private static void store(String hotelRef[]) {
+//        //Writing data to file
+//        try {
+//            FileWriter writerObject = new FileWriter("E:\\Java\\HotelProgram\\hotelData.txt");//Writer object
+//            writerObject.write("From store method!\n");
+//            //writing data to file
+//            for (int i = 0; i < hotelRef.length - 1; i++) {
+//                if (isEmpty(hotelRef, i) != -1) {
+//                    //if the method's return value is not -1 the room is empty
+//                    writerObject.write("room " + i + " is empty\n");
+//                } else {
+//                    //when return value is -1 the room is occupied. then display by whom it is
+//                    writerObject.write("room " + i + " occupied by " + hotelRef[i] + "\n");
+//                }
+//            }
+//            writerObject.close();//close file
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred! Could not write to file.");
+//            e.printStackTrace();//throw exception
+//        }
+//    }
 
-    //Store program data to file
-    private static void store(String hotelRef[]) {
-        //Writing data to file
-        try {
-            FileWriter writerObject = new FileWriter("E:\\Java\\HotelProgram\\hotelData.txt");//Writer object
-            writerObject.write("From store method!\n");
-            //writing data to file
-            for (int i = 0; i < hotelRef.length - 1; i++) {
-                if (isEmpty(hotelRef, i) != -1) {
-                    //if the method's return value is not -1 the room is empty
-                    writerObject.write("room " + i + " is empty\n");
-                } else {
-                    //when return value is -1 the room is occupied. then display by whom it is
-                    writerObject.write("room " + i + " occupied by " + hotelRef[i] + "\n");
-                }
-            }
-            writerObject.close();//close file
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred! Could not write to file.");
-            e.printStackTrace();//throw exception
-        }
-    }
+//    //Loading data from file
+//    private static void load() {
+//        try {
+//            File fileObject = new File("E:\\Java\\HotelProgram\\hotelData.txt");
+//            Scanner fileReader = new Scanner(fileObject);
+//
+//            while (fileReader.hasNextLine()) {
+//                String data = fileReader.nextLine();
+//                System.out.println(data);
+//            }
+//            fileReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();//
+//        }
+//    }
 
-    //Loading data from file
-    private static void load() {
-        try {
-            File fileObject = new File("E:\\Java\\HotelProgram\\hotelData.txt");
-            Scanner fileReader = new Scanner(fileObject);
-
-            while (fileReader.hasNextLine()) {
-                String data = fileReader.nextLine();
-                System.out.println(data);
-            }
-            fileReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();//
-        }
-    }
-
-    //View guests ordered alphabetically by name.
-    private static void sortNames(String hotelRef[]) {
-        String temp;
-        System.out.println("\nGuests Ordered alphabetically");
-
-        //Arrange the names in order using bubble sort algorithm
-        for (int j = 0; j < hotelRef.length-1; j++) {
-            for (int i = j + 1; i < hotelRef.length-1; i++) {
-                if (!(hotelRef[i].equals("e"))) {
-                    //Check if the first element of the array is less than the next element and swap them
-                    if (hotelRef[i].compareTo(hotelRef[j]) < 0) {
-                        temp = hotelRef[j];
-                        hotelRef[j] = hotelRef[i];
-                        hotelRef[i] = temp;
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < hotelRef.length-1; i++) {
-            if (!(hotelRef[i].equals("e"))) {
-                System.out.println(hotelRef[i]);//Display the sorted names if the name is not "e"
-            }
-        }
-    }
+//    //View guests ordered alphabetically by name.
+//    private static void sortNames(String hotelRef[]) {
+//        String temp;
+//        System.out.println("\nGuests Ordered alphabetically");
+//
+//        //Arrange the names in order using bubble sort algorithm
+//        for (int j = 0; j < hotelRef.length-1; j++) {
+//            for (int i = j + 1; i < hotelRef.length-1; i++) {
+//                if (!(hotelRef[i].equals("e"))) {
+//                    //Check if the first element of the array is less than the next element and swap them
+//                    if (hotelRef[i].compareTo(hotelRef[j]) < 0) {
+//                        temp = hotelRef[j];
+//                        hotelRef[j] = hotelRef[i];
+//                        hotelRef[i] = temp;
+//                    }
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i < hotelRef.length-1; i++) {
+//            if (!(hotelRef[i].equals("e"))) {
+//                System.out.println(hotelRef[i]);//Display the sorted names if the name is not "e"
+//            }
+//        }
+//    }
 }
