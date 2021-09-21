@@ -16,14 +16,6 @@ public class Main {
 
         String[] hotel = new String[7];//Array of rooms
 
-//        for (int x = 0; x < 6; x++) {
-//            hotel[x] = "";//initialise
-//        }
-
-        //myHotel.initialise();
-
-        //initialise(hotel); //calling initialize method
-
 
         while (true) {
             //Option Menu
@@ -85,16 +77,6 @@ public class Main {
             }
         }
     }
-
-    //find empty rooms
-//    private static int isEmpty(String hotelRef[], int roomNum) {
-//        if (hotelRef[roomNum].equals("e")) {
-//            //System.out.println("room " + roomNum + " is empty");
-//            return roomNum;
-//        } else
-//            //return -1 if the room is occupied
-//            return -1;
-//    }
 
 //    //Method to initialize empty rooms
 //    private static void initialise(String hotelRef[]) {
