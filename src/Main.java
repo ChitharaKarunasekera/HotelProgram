@@ -8,10 +8,8 @@ public class Main {
 
         char option;//users option at the menu
         int roomNum;//room number required
-        String roomName;//required room name
-
-        String[] hotel = new String[7];//Array of rooms
-
+        String firstName;
+        String lastName;
 
         while (true) {
             //Option Menu
@@ -43,7 +41,7 @@ public class Main {
             } else if (option == 'E') {
                 System.out.println("Empty rooms.");
                 //calls the isEmpty method and checks if each room is empty or not
-                for (int i = 0; i < hotel.length - 1; i++) {
+                for (int i = 0; i < myHotel.getRooms().length - 1; i++) {
                     if (myHotel.isEmpty(i) != -1) {
                         System.out.println("Room " + i);//Display room number is the function returns the number
                     }
@@ -55,9 +53,11 @@ public class Main {
                 myHotel.delete(roomNum);
             } else if (option == 'F') {
                 System.out.println("Find a customer.");
-                System.out.print("Enter the name for room: ");
-                roomName = input.next();//get the name to find room number
-                myHotel.find(roomName);
+                System.out.print("Enter paying guest's first name: ");
+                firstName = input.next();//get the first name to find room number
+                System.out.print("Enter paying guest's first name: ");
+                lastName = input.next();//get the last name to find room number
+                myHotel.find(firstName, lastName);
             } else if (option == 'S') {
                 System.out.println("Storing data to file.");
                 myHotel.store();
@@ -70,6 +70,9 @@ public class Main {
             } else if (option == 'Q') {
                 System.out.println("System will terminate!");
                 break;
+            }
+            else {
+                System.out.println("Option not found!");
             }
         }
     }

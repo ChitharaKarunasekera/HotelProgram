@@ -1,6 +1,38 @@
-room 0 occupied by Jack
-room 1 is empty
-room 2 occupied by Sam
-room 3 occupied by Chithara
-room 4 occupied by Alex
-room 5 occupied by Zein
+room 0 is empty
+Room 1
+- Room name : Jacks
+- Number of guests : 3
+_______________________________________________
+Details of Paying Guest
+- First Name : Jack
+- Last Name : Smith
+- Credit card : 1234123412341234
+
+room 2 is empty
+Room 3
+- Room name : Karus
+- Number of guests : 4
+_______________________________________________
+Details of Paying Guest
+- First Name : Chithara
+- Last Name : Karunasekera
+- Credit card : 1111111111111111
+
+Room 4
+- Room name : Cruss
+- Number of guests : 0
+_______________________________________________
+Details of Paying Guest
+- First Name : tom
+- Last Name : cruse
+- Credit card : 2222222222222222
+
+Room 5
+- Room name : Pole
+- Number of guests : 1
+_______________________________________________
+Details of Paying Guest
+- First Name : Quee
+- Last Name : Leo
+- Credit card : 3333333333333333
+

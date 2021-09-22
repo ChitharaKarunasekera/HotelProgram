@@ -37,10 +37,6 @@ public class Room {
         this.noOfGuests = noOfGuests;
     }
 
-    public void setPayingGuest(Person payingGuest) {
-        this.payingGuest = payingGuest;
-    }
-
     public void addPayingGuest(String firstName, String lastName, String creditCardNo){
         this.payingGuest = new Person(firstName, lastName, creditCardNo);
     }
