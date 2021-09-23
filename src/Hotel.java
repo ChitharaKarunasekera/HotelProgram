@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.Locale;
 import java.util.Scanner;
 import java.io.File;//File Classes to create file
@@ -6,7 +7,8 @@ import java.io.FileWriter;//File class to write to file
 import java.io.FileNotFoundException;//Exception if file was not found
 
 public class Hotel {
-    private Room rooms[] = new Room[6];//hotel contains 5 rooms
+    private Room rooms[] = new Room[3];//hotel contains 5 rooms
+    private Queue waitingList = new Queue();//Waiting list
 
     public Room[] getRooms() {
         return rooms;
@@ -53,81 +55,141 @@ public class Hotel {
 
         while (true) {
             String num;
-            System.out.print("Enter room number (0-5) or 6 to stop: ");
-            num = input.next();//get the input room number
-            try {
-                roomNum = Integer.parseInt(num);
-                //if the room number is between the existing room numbers
-                if (roomNum < 6 && roomNum >= 0) {
-                    if (isEmpty(roomNum) != -1) {
-                        //Name for room
-                        System.out.print("Enter name for room " + roomNum + " : ");
-                        roomName = input.next();//store name for room
-                        roomName = roomName.substring(0, 1).toUpperCase(Locale.ROOT) + roomName.substring(1);
-                        getRooms()[roomNum].setRoomName(roomName);//set name for room
+            if (!isFull()) {
+                System.out.print("Enter room number (0-5) or 6 to stop: ");
+                num = input.next();//get the input room number
+                try {
+                    roomNum = Integer.parseInt(num);
+                    //if the room number is between the existing room numbers
+                    if (roomNum < 6 && roomNum >= 0) {
+                        if (isEmpty(roomNum) != -1) {
+                            //Name for room
+                            //System.out.print("Enter name for room " + roomNum + " : ");
+                            roomName = "Karus"; //input.next();//store name for room
+                            roomName = roomName.substring(0, 1).toUpperCase(Locale.ROOT) + roomName.substring(1);
+                            getRooms()[roomNum].setRoomName(roomName);//set name for room
 
-                        //Input number of guests
-                        String noOfGuests;
+                            //Input number of guests
+                            String noOfGuests;
+                            //System.out.print("Enter number of guests in the room: ");
+                            noOfGuests ="2"; //input.next();
+                            //validate input
+                            try {
+                                guests = Integer.parseInt(noOfGuests);
+                                //Maximum of 4 guests are allowed in a room
+                                if (guests < 5 && guests > 0) {
+                                    getRooms()[roomNum].setNoOfGuests(guests);//set number of guests
+                                } else {
+                                    System.out.println("A maximum of 4 guests are allowed in a room. Please choose another room for the remaining guests!\n" +
+                                            "4 Guests is added to this room.");
+                                    getRooms()[roomNum].setNoOfGuests(4);//set number of guests as 4
+                                }
+                            } catch (NumberFormatException e) {
+                                System.out.println("Please enter an Integer.");
+                                System.out.print("Enter number of guests in the room: ");
+                                noOfGuests = input.next();
+                            }
+
+                            //Additional information of paying guest
+                            System.out.println("\nAdditional information of the Paying Guest.");
+                            //System.out.print("Enter first name: ");
+                            firstName = "Chithara";//input.next();
+                            System.out.print("Enter last name: ");
+                            lastName = input.next();
+                            //System.out.print("Enter credit card number: ");
+                            creditCard = "1234123412341234";//input.next();
+                            while (true) {
+                                if (creditCard.length() != 16) {
+                                    System.out.println("Invalid credit card number. Please re-enter the number.");
+                                    System.out.print("Enter credit card number: ");
+                                    creditCard = input.next();
+                                } else {
+                                    break;
+                                }
+                            }
+                            //Adding paying guest to room
+                            getRooms()[roomNum].addPayingGuest(firstName, lastName, creditCard);
+
+                            System.out.println("Customer " + getRooms()[roomNum].getPayingGuest().getFirstName() + " " + getRooms()[roomNum].getPayingGuest().getLastName() + " was successfully added to room " + roomNum + "\n");
+                        } else {
+                            System.out.println("Sorry! This room is already occupied. Please choose a different room.\n");
+                        }
+                    }
+                    //if number is 6 stop adding customers
+                    else if (roomNum == 6) {
+                        System.out.println("Stopped adding customers to rooms");
+                        break;
+                    }
+                    //Entered an invalid room number
+                    else {
+                        System.out.println("\nInvalid room number!\n");
+                    }
+
+                } catch (NumberFormatException e) {
+                    System.out.println("Please enter an Integer.");
+                }
+            }
+            else
+            {
+                //Executes if the rooms are full, to move the customer to the waiting list
+
+                System.out.println("\nSorry, Rooms are full! You will be added to the waiting list\n");
+
+                if(waitingList.isFull())
+                {
+                    System.out.println("Waiting list is full!"); //Inform the customer that the waiting list is also full
+                }
+                else {
+                    //Name for room
+                    //System.out.print("Enter name for room " + roomNum + " : ");
+                    roomName = "Karus"; //input.next();//store name for room
+                    roomName = roomName.substring(0, 1).toUpperCase(Locale.ROOT) + roomName.substring(1);
+
+                    //Input number of guests
+                    String noOfGuests;
+                    //System.out.print("Enter number of guests in the room: ");
+                    noOfGuests ="2"; //input.next();
+                    //validate input
+                    try {
+                        guests = Integer.parseInt(noOfGuests);
+                        //Maximum of 4 guests are allowed in a room
+                        if (guests > 5 || guests < 0) {
+                            System.out.println("A maximum of 4 guests are allowed in a room. Please choose another room for the remaining guests!\n" +
+                                    "4 Guests is added to this room.");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter an Integer.");
                         System.out.print("Enter number of guests in the room: ");
                         noOfGuests = input.next();
-                        //validate input
-                        try {
-                            guests = Integer.parseInt(noOfGuests);
-                            //Maximum of 4 guests are allowed in a room
-                            if (guests < 5 && guests > 0) {
-                                getRooms()[roomNum].setNoOfGuests(guests);//set number of guests
-                            }
-                            else {
-                                System.out.println("A maximum of 4 guests are allowed in a room. Please choose another room for the remaining guests!\n" +
-                                        "4 Guests is added to this room.");
-                                getRooms()[roomNum].setNoOfGuests(4);//set number of guests as 4
-                            }
-                        } catch (NumberFormatException e) {
-                            System.out.println("Please enter an Integer.");
-                            System.out.print("Enter number of guests in the room: ");
-                            noOfGuests = input.next();
-                        }
-
-                        //Additional information of paying guest
-                        System.out.println("\nAdditional information of the Paying Guest.");
-                        System.out.print("Enter first name: ");
-                        firstName = input.next();
-                        System.out.print("Enter last name: ");
-                        lastName = input.next();
-                        System.out.print("Enter credit card number: ");
-                        creditCard = input.next();
-                        while (true) {
-                            if (creditCard.length() != 16) {
-                                System.out.println("Invalid credit card number. Please re-enter the number.");
-                                System.out.print("Enter credit card number: ");
-                                creditCard = input.next();
-                            } else {
-                                break;
-                            }
-                        }
-                        //Adding paying guest to room
-                        getRooms()[roomNum].addPayingGuest(firstName, lastName, creditCard);
-
-                        System.out.println("Customer " + getRooms()[roomNum].getPayingGuest().getFirstName() + " " + getRooms()[roomNum].getPayingGuest().getLastName() + " was successfully added to room " + roomNum + "\n");
-                    } else {
-                        System.out.println("Sorry! This room is already occupied. Please choose a different room.\n");
                     }
-                }
-                //if number is 6 stop adding customers
-                else if (roomNum == 6) {
-                    System.out.println("Stopped adding customers to rooms");
-                    break;
-                }
-                //Entered an invalid room number
-                else {
-                    System.out.println("\nInvalid room number!\n");
-                }
 
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter an Integer.");
+                    //Additional information of paying guest
+                    System.out.println("\nAdditional information of the Paying Guest.");
+                    //System.out.print("Enter first name: ");
+                    firstName = "Chithara";//input.next();
+                    System.out.print("Enter last name: ");
+                    lastName = input.next();
+                    //System.out.print("Enter credit card number: ");
+                    creditCard = "1234123412341234";//input.next();
+                    while (true) {
+                        if (creditCard.length() != 16) {
+                            System.out.println("Invalid credit card number. Please re-enter the number.");
+                            System.out.print("Enter credit card number: ");
+                            creditCard = input.next();
+                        } else {
+                            break;
+                        }
+                    }
+                    Room room = waitingList.push();
+                    Person payingGuest = new Person(firstName, lastName, creditCard);
+
+                    room.setRoomName(roomName);
+                    room.setNoOfGuests(guests);
+                    room.setPayingGuest(payingGuest);
+
+                    System.out.println("Customer " + payingGuest.getFirstName() + " " + payingGuest.getLastName() + " is added to the waiting list." + "\n");
+                }
             }
-
-
         }
     }
 
@@ -144,10 +206,23 @@ public class Hotel {
 
             //remove the customer if the request was confirmed or else cancel the requests
             if (ans == 'Y') {
-                System.out.println(getRooms()[roomNum].getPayingGuest().getFirstName() + " " + getRooms()[roomNum].getPayingGuest().getFirstName() +  " was removed from room " + roomNum);
+                System.out.println(getRooms()[roomNum].getPayingGuest().getFirstName() + " " + getRooms()[roomNum].getPayingGuest().getFirstName() + " was removed from room " + roomNum);
                 getRooms()[roomNum].setRoomName("e");
                 getRooms()[roomNum].setNoOfGuests(0);
                 getRooms()[roomNum].deletePayingGuest();
+
+                if (!waitingList.isEmpty()){
+                    //Executed to add next customer in the waiting list to room if present
+
+                    Room newRoom = waitingList.pop(); //get the first room object of the queue
+
+                    //set the details of the room to the room where a customer got deleted
+                    getRooms()[roomNum].setRoomName(newRoom.getRoomName());
+                    getRooms()[roomNum].setNoOfGuests(newRoom.getNoOfGuests());
+                    getRooms()[roomNum].setPayingGuest(newRoom.getPayingGuest());
+
+                    System.out.println("Customer " + newRoom.getPayingGuest().getFirstName()+ " " + newRoom.getPayingGuest().getLastName() + "was added to room " + roomNum);
+                }
 
             } else {
                 System.out.println("Request has been canceled! Customer " + getRooms()[roomNum].getPayingGuest().getFirstName() + " " + getRooms()[roomNum].getPayingGuest().getLastName() + " was not removed.");
@@ -163,7 +238,7 @@ public class Hotel {
     public void find(String firstName, String lastName) {
         for (int i = 0; i < getRooms().length; i++) {
             //if first name and last name are equal to input names
-            if(getRooms()[i].getPayingGuest() != null) {
+            if (getRooms()[i].getPayingGuest() != null) {
                 if (getRooms()[i].getPayingGuest().getFirstName().equalsIgnoreCase(firstName)
                         && getRooms()[i].getPayingGuest().getLastName().equalsIgnoreCase(lastName)
                 ) {
@@ -252,5 +327,15 @@ public class Hotel {
                 System.out.println(getRooms()[i].getRoomName());//Display the sorted names if the name is not "e"
             }
         }
+    }
+
+    //Check if the hotel is full
+    public boolean isFull() {
+        for (int i = 0; i < getRooms().length; i++) {
+            if (getRooms()[i].getRoomName().equals("e")) {
+                return false;
+            }
+        }
+        return true;
     }
 }

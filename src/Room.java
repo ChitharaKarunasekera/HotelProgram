@@ -41,6 +41,10 @@ public class Room {
         this.payingGuest = new Person(firstName, lastName, creditCardNo);
     }
 
+    public void setPayingGuest(Person payingGuest) {
+        this.payingGuest = payingGuest;
+    }
+
     public void deletePayingGuest(){
         this.payingGuest = null;
     }
