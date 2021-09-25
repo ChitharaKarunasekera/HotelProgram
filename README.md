@@ -1,6 +1,6 @@
 # HotelProgram
 
-This repository contains a hotel program that is done for my university coursework. This program has the ability to,
+This repository contains a hotel program that is done for my university coursework. It is a comsol This program has the ability to,
 * View customers, 
 * Add new customers to rooms,
 * View empty rooms,
