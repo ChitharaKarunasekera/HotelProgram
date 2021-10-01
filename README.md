@@ -14,5 +14,5 @@ In this system, if the hotel is full the guests will be added to a waiting list/
 ## Tasks ##
 - [x] Task 1
 - [x] Task 2
-- [u] Task 3
+- [] Task 3
 - [x] Task 4
